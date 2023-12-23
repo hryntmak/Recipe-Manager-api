@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Recipe_app.iml" filepath="$PROJECT_DIR$/Recipe_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/bi-tjv_semestral_work.iml" filepath="$PROJECT_DIR$/.idea/bi-tjv_semestral_work.iml" />
+    </modules>
+  </component>
+</project>
