@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToMany;
 import java.util.Collection;
 
 @Entity
-public class Ingredient {
+public class Ingredient implements EntityWithId<Long> {
     @Id
     @GeneratedValue
     private Long id;
