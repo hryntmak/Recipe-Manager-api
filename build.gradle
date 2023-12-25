@@ -1,17 +1,29 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '3.1.5'
+    id 'io.spring.dependency-management' version '1.1.3'
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+group = 'cz.cvut.fit.tjv.social_network'
+version = '1.B231-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+//    implementation group: 'org.springframework', name: 'spring-context', version: '6.0.13'
+//    implementation group: 'org.hibernate', name: 'hibernate-core', version: '6.3.1.Final'
+//    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '3.1.5'
+//    runtimeOnly group: 'com.h2database', name: 'h2', version: '2.2.224'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    runtimeOnly 'com.h2database:h2'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
