@@ -17,6 +17,7 @@ public class Ingredient implements EntityWithId<Long> {
     @ManyToMany(mappedBy = "containIngredients")
     private Collection<Recipe> includesIn;
 
+    @Override
     public Long getId() {
         return id;
     }

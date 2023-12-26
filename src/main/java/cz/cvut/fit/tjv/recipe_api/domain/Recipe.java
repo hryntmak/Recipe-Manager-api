@@ -13,7 +13,6 @@ public class Recipe implements EntityWithId<Long> {
     @GeneratedValue
     private Long id;
     private Complexity complexity;
-
     private int cookingTime;
     private String name;
     @ManyToMany
