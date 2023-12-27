@@ -65,9 +65,14 @@ public class RecipeController {
             return recipeService.readAll();
     }
 
-    @GetMapping("/ingredients/{price}")
+    @GetMapping("/{price}")
     public Iterable<Recipe> readCheaperThen(@PathVariable double price) {
         return recipeService.readCheaperThan(price);
+    }
+
+    @GetMapping("/ingredients/{count}")
+    public Iterable<Recipe> readContainGreaterThan(@PathVariable int count) {
+        return recipeService.readContainGreaterThan(count);
     }
 
     @DeleteMapping("/{id}")

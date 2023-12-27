@@ -21,6 +21,7 @@ public class Recipe implements EntityWithId<Long> {
     private final Collection<Ingredient> containIngredients = new ArrayList<>();
 
     @ManyToOne
+    @JoinColumn(name = "dish_id")
     private Dish dish;
 
     @Override
@@ -39,6 +40,18 @@ public class Recipe implements EntityWithId<Long> {
     }
 
     public Recipe() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Dish getDish() {
+        return dish;
+    }
+
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 
     @Override

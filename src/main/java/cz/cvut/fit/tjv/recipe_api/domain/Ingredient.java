@@ -15,6 +15,11 @@ public class Ingredient implements EntityWithId<Long> {
     private String name;
     private double price;
     @ManyToMany
+    @JoinTable(
+            name = "recipes_ingredients",
+            joinColumns = @JoinColumn(name = "Ingredient_id"),
+            inverseJoinColumns = @JoinColumn(name = "Recipes_id")
+    )
     @JsonIgnoreProperties("containIngredients")
     private Collection<Recipe> includesIn;
 

@@ -51,4 +51,9 @@ public class RecipeServiceImpl extends CrudServiceImpl<Recipe, Long> implements 
     public Collection<Recipe> readCheaperThan(double price) {
         return recipeRepository.findByPriceLowerThan(price);
     }
+
+    @Override
+    public Collection<Recipe> readContainGreaterThan(int count) {
+        return recipeRepository.findByContainGreaterThan(count);
+    }
 }
