@@ -66,11 +66,8 @@ public class RecipeController {
     }
 
     @GetMapping("/ingredients/{price}")
-    public Iterable<Recipe> readCheaperThen(@RequestParam Optional<String> name) {
-        if (name.isPresent())
-            return recipeService.readAllByName(name.get());
-        else
-            return recipeService.readAll();
+    public Iterable<Recipe> readCheaperThen(@PathVariable double price) {
+        return recipeService.readCheaperThan(price);
     }
 
     @DeleteMapping("/{id}")
