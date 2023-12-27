@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 public class Ingredient implements EntityWithId<Long> {
@@ -17,6 +18,23 @@ public class Ingredient implements EntityWithId<Long> {
     @JsonIgnoreProperties("containIngredients")
     private Collection<Recipe> includesIn;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Ingredient ingredient = (Ingredient) o;
+
+        return Objects.equals(id, ingredient.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    public Ingredient() {
+    }
     @Override
     public Long getId() {
         return id;

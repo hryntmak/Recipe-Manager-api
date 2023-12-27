@@ -1,6 +1,6 @@
 package cz.cvut.fit.tjv.recipe_api.repository;
 
-import cz.cvut.fit.tjv.recipe_api.domain.Complexity;
+import cz.cvut.fit.tjv.recipe_api.enums.Complexity;
 import cz.cvut.fit.tjv.recipe_api.domain.Recipe;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

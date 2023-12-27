@@ -1,4 +1,4 @@
-package cz.cvut.fit.tjv.recipe_api.domain;
+package cz.cvut.fit.tjv.recipe_api.enums;
 
 public enum Complexity {
     LOW, MEDIUM, HIGH

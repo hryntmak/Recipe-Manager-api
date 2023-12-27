@@ -1,7 +1,7 @@
 package cz.cvut.fit.tjv.recipe_api.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import cz.cvut.fit.tjv.recipe_api.enums.Complexity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -19,6 +19,9 @@ public class Recipe implements EntityWithId<Long> {
     @ManyToMany(mappedBy = "includesIn")
     @JsonIgnoreProperties("includesIn")
     private final Collection<Ingredient> containIngredients = new ArrayList<>();
+
+    @ManyToOne
+    private Dish dish;
 
     @Override
     public boolean equals(Object o) {
