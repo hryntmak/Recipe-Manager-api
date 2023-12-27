@@ -26,7 +26,7 @@ public class RecipeServiceImpl extends CrudServiceImpl<Recipe, Long> implements 
 
     @Override
     public Collection<Recipe> readAllByName(String name) {
-        return recipeRepository.findByName(name);
+        return recipeRepository.findRecipeByName(name);
     }
 
     @Override
@@ -45,5 +45,12 @@ public class RecipeServiceImpl extends CrudServiceImpl<Recipe, Long> implements 
 
         recipeRepository.save(recipe);
         ingredientRepository.save(ingredient);
+    }
+
+    @Override
+    public Collection<Recipe> readCheaperThan(double price) {
+
+
+        return null;
     }
 }

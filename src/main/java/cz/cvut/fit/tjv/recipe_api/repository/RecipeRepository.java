@@ -10,7 +10,7 @@ import java.util.Collection;
 
 @Repository
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
-    Collection<Recipe> findByName(String recipeName);
+    Collection<Recipe> findRecipeByName(String recipeName);
     Collection<Recipe> findByComplexity(Complexity recipeComplexity);
 
     @Query(value = "select r from Recipe r where size(r.containIngredients) > :countOfIngredient")

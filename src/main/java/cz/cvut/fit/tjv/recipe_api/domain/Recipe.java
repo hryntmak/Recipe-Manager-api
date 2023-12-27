@@ -1,6 +1,7 @@
 package cz.cvut.fit.tjv.recipe_api.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -15,7 +16,8 @@ public class Recipe implements EntityWithId<Long> {
     private Complexity complexity;
     private int cookingTime;
     private String name;
-    @ManyToMany
+    @ManyToMany(mappedBy = "includesIn")
+    @JsonIgnoreProperties("includesIn")
     private final Collection<Ingredient> containIngredients = new ArrayList<>();
 
     @Override

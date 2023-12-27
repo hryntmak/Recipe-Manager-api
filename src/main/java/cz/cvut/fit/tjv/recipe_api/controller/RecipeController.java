@@ -29,7 +29,7 @@ public class RecipeController {
     }
 
     @PostMapping
-    @Operation(description = "register new user")
+    @Operation(description = "Creat new recipe")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "409", description = "duplicate ID", content = @Content)
@@ -42,8 +42,31 @@ public class RecipeController {
         }
     }
 
+    @PutMapping("/{idRecipe}/ingredients/{idIngredient}")
+    @Operation(description = "Add new ingredient to the recipe")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "409", description = "invalid ID", content = @Content)
+    })
+    public void addIngredient(@PathVariable long idRecipe, @PathVariable long idIngredient) {
+        try {
+            recipeService.addIngredient(idRecipe, idIngredient);
+        } catch(IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
+        }
+    }
+
     @GetMapping
     public Iterable<Recipe> readAllOrByName(@RequestParam Optional<String> name) {
+        if (name.isPresent()) {
+            return recipeService.readAllByName(name.get());
+        }
+        else
+            return recipeService.readAll();
+    }
+
+    @GetMapping("/ingredients/{price}")
+    public Iterable<Recipe> readCheaperThen(@RequestParam Optional<String> name) {
         if (name.isPresent())
             return recipeService.readAllByName(name.get());
         else

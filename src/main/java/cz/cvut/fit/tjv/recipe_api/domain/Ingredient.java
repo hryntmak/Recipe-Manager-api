@@ -1,9 +1,8 @@
 package cz.cvut.fit.tjv.recipe_api.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
 import java.util.Collection;
 
@@ -14,7 +13,8 @@ public class Ingredient implements EntityWithId<Long> {
     private Long id;
     private String name;
     private double price;
-    @ManyToMany(mappedBy = "containIngredients")
+    @ManyToMany
+    @JsonIgnoreProperties("containIngredients")
     private Collection<Recipe> includesIn;
 
     @Override

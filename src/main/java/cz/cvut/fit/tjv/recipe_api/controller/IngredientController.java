@@ -29,7 +29,7 @@ public class IngredientController {
     }
 
     @PostMapping
-    @Operation(description = "register new user")
+    @Operation(description = "create new ingredient")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "409", description = "duplicate ID", content = @Content)
@@ -53,7 +53,7 @@ public class IngredientController {
     @DeleteMapping("/{id}")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "404", description = "Can't delete. Recipe with this ID is not found.", content = @Content)
+            @ApiResponse(responseCode = "404", description = "Can't delete. Ingredient with this ID is not found.", content = @Content)
     })
     public void delete(@PathVariable long id) {
         if (ingredientService.readById(id).isEmpty()) {
