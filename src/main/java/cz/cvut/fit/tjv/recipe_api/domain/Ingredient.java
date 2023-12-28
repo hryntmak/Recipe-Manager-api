@@ -14,7 +14,7 @@ public class Ingredient implements EntityWithId<Long> {
     private Long id;
     private String name;
     private double price;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "recipes_ingredients",
             joinColumns = @JoinColumn(name = "Ingredient_id"),

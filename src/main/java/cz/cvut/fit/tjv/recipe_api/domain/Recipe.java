@@ -16,7 +16,7 @@ public class Recipe implements EntityWithId<Long> {
     private Complexity complexity;
     private int cookingTime;
     private String name;
-    @ManyToMany(mappedBy = "includesIn")
+    @ManyToMany(mappedBy = "includesIn", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("includesIn")
     private final Collection<Ingredient> containIngredients = new ArrayList<>();
 

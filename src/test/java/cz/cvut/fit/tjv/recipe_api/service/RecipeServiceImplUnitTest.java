@@ -40,7 +40,19 @@ public class RecipeServiceImplUnitTest {
                 ingredientRepository.findById(ingredient.getId())
         ).thenReturn(Optional.of(ingredient));
     }
+    @Test
+    void likePostInvalidPostId() {
+        Mockito.when(
+                recipeRepository.findById(recipe.getId())
+        ).thenReturn(Optional.empty());
 
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> recipeService.addIngredient(recipe.getId(), ingredient.getId())
+        );
+        Mockito.verify(recipeRepository, Mockito.never())
+                .save(Mockito.any());
+    }
     @Test
     void likePost() {
         recipeService.addIngredient(recipe.getId(), ingredient.getId());
