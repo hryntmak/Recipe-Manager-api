@@ -1,6 +1,8 @@
 package cz.cvut.fit.tjv.recipe_api.controller;
 
 import cz.cvut.fit.tjv.recipe_api.domain.Dish;
+import cz.cvut.fit.tjv.recipe_api.domain.Ingredient;
+import cz.cvut.fit.tjv.recipe_api.domain.Recipe;
 import cz.cvut.fit.tjv.recipe_api.service.DishService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -43,8 +45,30 @@ public class DishController {
     }
 
     @GetMapping
-    public Iterable<Dish> readAllOrByName(@RequestParam Optional<String> name) {
+    public Iterable<Dish> readAll() {
         return dishService.readAll();
+    }
+
+    @GetMapping("/{id}")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404", description = "Dish with this ID is not found.", content = @Content)
+    })
+    public Dish readDishById(@PathVariable long id) {
+        if (dishService.readById(id).isPresent())
+            return dishService.readById(id).get();
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/{id}/recipes")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404", description = "Dish with this ID is not found.", content = @Content)
+    })
+    public Iterable<Recipe> readDishRecipesById(@PathVariable long id) {
+        if (dishService.readById(id).isPresent())
+            return dishService.readById(id).get().getRecipes();
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")

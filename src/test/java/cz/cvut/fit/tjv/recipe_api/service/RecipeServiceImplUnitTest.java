@@ -41,7 +41,7 @@ public class RecipeServiceImplUnitTest {
         ).thenReturn(Optional.of(ingredient));
     }
     @Test
-    void likePostInvalidPostId() {
+    void addIngredientInvalidRecipeId() {
         Mockito.when(
                 recipeRepository.findById(recipe.getId())
         ).thenReturn(Optional.empty());
@@ -54,7 +54,7 @@ public class RecipeServiceImplUnitTest {
                 .save(Mockito.any());
     }
     @Test
-    void likePost() {
+    void addIngredient() {
         recipeService.addIngredient(recipe.getId(), ingredient.getId());
 
         Assertions.assertTrue(recipe.getContainIngredients().contains(ingredient));

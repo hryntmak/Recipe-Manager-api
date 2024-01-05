@@ -37,11 +37,19 @@ public class RecipeServiceImplIntegrationTest {
     }
 
     @Test
-    void addIngredient() {
+    void addIngredientSuccess() {
         recipeService.addIngredient(recipe.getId(), ingredient.getId());
 
         Recipe recipeFromDb = recipeRepository.findById(recipe.getId()).get();
         Assertions.assertTrue(recipeFromDb.getContainIngredients().contains(ingredient));
         Assertions.assertEquals(1, recipeFromDb.getContainIngredients().size());
+    }
+
+    @Test
+    void addIngredientFail() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> recipeService.addIngredient(recipe.getId(), 99999L));
+
+        Recipe recipeFromDb = recipeRepository.findById(recipe.getId()).get();
+        Assertions.assertEquals(0, recipeFromDb.getContainIngredients().size());
     }
 }

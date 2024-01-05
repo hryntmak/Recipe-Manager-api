@@ -20,7 +20,8 @@ public class Recipe implements EntityWithId<Long> {
     @JsonIgnoreProperties("includesIn")
     private final Collection<Ingredient> containIngredients = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("recipes")
     @JoinColumn(name = "dish_id")
     private Dish dish;
 

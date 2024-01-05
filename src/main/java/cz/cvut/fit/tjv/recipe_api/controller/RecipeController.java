@@ -1,6 +1,9 @@
 package cz.cvut.fit.tjv.recipe_api.controller;
 
+import cz.cvut.fit.tjv.recipe_api.domain.Dish;
+import cz.cvut.fit.tjv.recipe_api.domain.Ingredient;
 import cz.cvut.fit.tjv.recipe_api.domain.Recipe;
+import cz.cvut.fit.tjv.recipe_api.service.IngredientService;
 import cz.cvut.fit.tjv.recipe_api.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,14 +21,14 @@ import java.util.Optional;
 public class RecipeController {
     private RecipeService recipeService;
 
+    public RecipeController(RecipeService recipeService) {
+        this.recipeService = recipeService;
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable long id, @RequestBody Recipe data) {
         recipeService.update(id, data);
-    }
-
-    public RecipeController(RecipeService recipeService) {
-        this.recipeService = recipeService;
     }
 
     @PostMapping
@@ -57,17 +60,44 @@ public class RecipeController {
     }
 
     @GetMapping
-    public Iterable<Recipe> readAllOrByName(@RequestParam Optional<String> name) {
-        if (name.isPresent()) {
-            return recipeService.readAllByName(name.get());
+    public Iterable<Recipe> readAllOrByPrice(@RequestParam Optional<Double> price) {
+        if (price.isPresent()) {
+            return recipeService.readCheaperThan(price.get());
         }
         else
             return recipeService.readAll();
     }
 
-    @GetMapping("/{price}")
-    public Iterable<Recipe> readCheaperThen(@PathVariable double price) {
-        return recipeService.readCheaperThan(price);
+    @GetMapping("/{id}")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404", description = "Recipe with this ID is not found.", content = @Content)
+    })
+    public Recipe readRecipeById(@PathVariable long id) {
+        if (recipeService.readById(id).isPresent())
+            return recipeService.readById(id).get();
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/{id}/dish")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404", description = "Recipe with this ID is not found.", content = @Content)
+    })
+    public Dish readRecipeDishById(@PathVariable long id) {
+        if (recipeService.readById(id).isPresent())
+            return recipeService.readById(id).get().getDish();
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+    @GetMapping("/{id}/ingredients")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404", description = "Recipe with this ID is not found.", content = @Content)
+    })
+    public Iterable<Ingredient> readRecipeIngredientsById(@PathVariable long id) {
+        if (recipeService.readById(id).isPresent())
+            return recipeService.readById(id).get().getContainIngredients();
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/ingredients/{count}")

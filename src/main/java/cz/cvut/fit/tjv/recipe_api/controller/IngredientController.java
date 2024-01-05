@@ -1,6 +1,7 @@
 package cz.cvut.fit.tjv.recipe_api.controller;
 
 import cz.cvut.fit.tjv.recipe_api.domain.Ingredient;
+import cz.cvut.fit.tjv.recipe_api.domain.Recipe;
 import cz.cvut.fit.tjv.recipe_api.service.IngredientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -50,6 +51,16 @@ public class IngredientController {
             return ingredientService.readAll();
     }
 
+    @GetMapping("/{id}")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "404", description = "Recipe with this ID is not found.", content = @Content)
+    })
+    public Ingredient readIngredientById(@PathVariable long id) {
+        if (ingredientService.readById(id).isPresent())
+            return ingredientService.readById(id).get();
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
     @DeleteMapping("/{id}")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
