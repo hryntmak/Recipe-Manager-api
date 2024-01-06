@@ -44,6 +44,25 @@ public class RecipeServiceImpl extends CrudServiceImpl<Recipe, Long> implements 
         ingredient.getIncludesIn().add(recipe);
 
         recipeRepository.save(recipe);
+    }
+
+    @Override
+    public void deleteIngredientFromRecipe(long recipeId, long ingredientId) {
+        Optional<Recipe> optRecipe = recipeRepository.findById(recipeId);
+        Optional<Ingredient> optIngredient = ingredientRepository.findById(ingredientId);
+
+        if (optRecipe.isEmpty() || optIngredient.isEmpty())
+            throw new IllegalArgumentException("invalid ID");
+
+        Recipe recipe = optRecipe.get();
+        Ingredient ingredient = optIngredient.get();
+
+        if (recipe.getContainIngredients().contains(ingredient) && ingredient.getIncludesIn().contains(recipe)) {
+            recipe.getContainIngredients().remove(ingredient);
+            ingredient.getIncludesIn().remove(recipe);
+        }
+
+        recipeRepository.save(recipe);
         ingredientRepository.save(ingredient);
     }
 

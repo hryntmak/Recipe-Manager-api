@@ -60,6 +60,20 @@ public class RecipeController {
         }
     }
 
+    @DeleteMapping("/{idRecipe}/ingredients/{idIngredient}")
+    @Operation(description = "Delete ingredient to the recipe")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "409", description = "invalid ID", content = @Content)
+    })
+    public void deleteIngredientFromRecipe(@PathVariable long idRecipe, @PathVariable long idIngredient) {
+        try {
+            recipeService.deleteIngredientFromRecipe(idRecipe, idIngredient);
+        } catch(IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
+        }
+    }
+
     @GetMapping
     @Operation(description = "Read all recipes, if param price is present, than read recipes with price lower than param")
     public Iterable<Recipe> readAllOrByPrice(@RequestParam Optional<Double> price) {

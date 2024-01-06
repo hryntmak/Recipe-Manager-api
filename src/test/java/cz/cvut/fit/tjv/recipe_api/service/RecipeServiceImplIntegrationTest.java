@@ -30,14 +30,19 @@ public class RecipeServiceImplIntegrationTest {
         ingredient = new Ingredient();
         recipe = new Recipe();
         ingredient.setId(322L);
+        ingredient.setName("Ingredient");
         ingredient.setIncludesIn(new HashSet<>());
         recipe.setId(122L);
+        recipe.setName("Recipe");
         ingredientRepository.save(ingredient);
         recipeRepository.save(recipe);
     }
 
     @Test
     void addIngredientSuccess() {
+        Recipe recipeFromDbBefore = recipeRepository.findById(recipe.getId()).get();
+        Assertions.assertEquals(0, recipeFromDbBefore.getContainIngredients().size());
+
         recipeService.addIngredient(recipe.getId(), ingredient.getId());
 
         Recipe recipeFromDb = recipeRepository.findById(recipe.getId()).get();
