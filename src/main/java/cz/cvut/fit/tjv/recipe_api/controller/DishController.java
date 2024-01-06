@@ -25,6 +25,7 @@ public class DishController {
     }
 
     @PutMapping("/{id}")
+    @Operation(description = "Update dish")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable long id, @RequestBody Dish data) {
         dishService.update(id, data);
@@ -45,11 +46,13 @@ public class DishController {
     }
 
     @GetMapping
+    @Operation(description = "Read all dishes")
     public Iterable<Dish> readAll() {
         return dishService.readAll();
     }
 
     @GetMapping("/{id}")
+    @Operation(description = "Read dish by ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "404", description = "Dish with this ID is not found.", content = @Content)
@@ -60,21 +63,11 @@ public class DishController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{id}/recipes")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "404", description = "Dish with this ID is not found.", content = @Content)
-    })
-    public Iterable<Recipe> readDishRecipesById(@PathVariable long id) {
-        if (dishService.readById(id).isPresent())
-            return dishService.readById(id).get().getRecipes();
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-    }
-
     @DeleteMapping("/{id}")
+    @Operation(description = "Delete dish by ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "404", description = "Can't delete. Ingredient with this ID is not found.", content = @Content)
+            @ApiResponse(responseCode = "404", description = "Can't delete. Dish with this ID is not found.", content = @Content)
     })
     public void delete(@PathVariable long id) {
         if (dishService.readById(id).isEmpty()) {

@@ -8,6 +8,4 @@ public interface RecipeService extends CrudService<Recipe, Long>{
     Collection<Recipe> readAllByName(String name);
     void addIngredient(long recipeId, long ingredientId);
     Collection<Recipe> readCheaperThan(double price);
-    Collection<Recipe> readContainGreaterThan(int count);
-
 }

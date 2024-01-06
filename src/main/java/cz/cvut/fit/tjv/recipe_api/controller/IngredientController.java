@@ -20,6 +20,7 @@ public class IngredientController {
     private IngredientService ingredientService;
 
     @PutMapping("/{id}")
+    @Operation(description = "Update new ingredient")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable long id, @RequestBody Ingredient data) {
         ingredientService.update(id, data);
@@ -30,7 +31,7 @@ public class IngredientController {
     }
 
     @PostMapping
-    @Operation(description = "create new ingredient")
+    @Operation(description = "Create new ingredient")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "409", description = "duplicate ID", content = @Content)
@@ -44,14 +45,13 @@ public class IngredientController {
     }
 
     @GetMapping
-    public Iterable<Ingredient> readAllOrByName(@RequestParam Optional<String> name) {
-        if (name.isPresent())
-            return ingredientService.readAllByName(name.get());
-        else
-            return ingredientService.readAll();
+    @Operation(description = "Read all ingredients")
+    public Iterable<Ingredient> readAll() {
+        return ingredientService.readAll();
     }
 
     @GetMapping("/{id}")
+    @Operation(description = "Read ingredient by ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "404", description = "Recipe with this ID is not found.", content = @Content)
@@ -62,6 +62,7 @@ public class IngredientController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
     @DeleteMapping("/{id}")
+    @Operation(description = "Delete ingredient by ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "404", description = "Can't delete. Ingredient with this ID is not found.", content = @Content)

@@ -26,6 +26,7 @@ public class RecipeController {
     }
 
     @PutMapping("/{id}")
+    @Operation(description = "Update recipe")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable long id, @RequestBody Recipe data) {
         recipeService.update(id, data);
@@ -60,6 +61,7 @@ public class RecipeController {
     }
 
     @GetMapping
+    @Operation(description = "Read all recipes, if param price is present, than read recipes with price lower than param")
     public Iterable<Recipe> readAllOrByPrice(@RequestParam Optional<Double> price) {
         if (price.isPresent()) {
             return recipeService.readCheaperThan(price.get());
@@ -69,6 +71,7 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
+    @Operation(description = "Read a recipe by ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "404", description = "Recipe with this ID is not found.", content = @Content)
@@ -80,6 +83,7 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}/dish")
+    @Operation(description = "Read dish of the recipe by recipe ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "404", description = "Recipe with this ID is not found.", content = @Content)
@@ -90,6 +94,7 @@ public class RecipeController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
     @GetMapping("/{id}/ingredients")
+    @Operation(description = "Read ingredients of the recipe by recipe ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "404", description = "Recipe with this ID is not found.", content = @Content)
@@ -100,12 +105,8 @@ public class RecipeController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/ingredients/{count}")
-    public Iterable<Recipe> readContainGreaterThan(@PathVariable int count) {
-        return recipeService.readContainGreaterThan(count);
-    }
-
     @DeleteMapping("/{id}")
+    @Operation(description = "Delete recipe ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "404", description = "Can't delete. Recipe with this ID is not found.", content = @Content)

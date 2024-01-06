@@ -11,8 +11,6 @@ import java.util.Collection;
 @Repository
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     Collection<Recipe> findRecipeByName(String recipeName);
-    @Query(value = "select r1 from Recipe r1 where r1.id in (select r.id from Recipe r join r.containIngredients where size(r.containIngredients) > :countOfIngredient)")
-    Collection<Recipe> findByContainGreaterThan(int countOfIngredient);
     @Query(value = "select r from Recipe r left join r.containIngredients i group by r.id having coalesce(sum(i.price), 0) < :price")
     Collection<Recipe> findByPriceLowerThan(double price);
 }
