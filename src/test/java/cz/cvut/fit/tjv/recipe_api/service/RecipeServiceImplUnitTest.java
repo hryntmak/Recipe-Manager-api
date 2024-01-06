@@ -65,4 +65,22 @@ public class RecipeServiceImplUnitTest {
                 Mockito.atLeastOnce()
         ).save(recipe);
     }
+
+    @Test
+    void addSameIngredientTwice() {
+        recipeService.addIngredient(recipe.getId(), ingredient.getId());
+        Mockito.verify(
+                recipeRepository,
+                Mockito.atLeastOnce()
+        ).save(recipe);
+
+        recipeService.addIngredient(recipe.getId(), ingredient.getId());
+        Mockito.verify(
+                recipeRepository,
+                Mockito.atMostOnce()
+        ).save(recipe);
+
+        Assertions.assertTrue(recipe.getContainIngredients().contains(ingredient));
+        Assertions.assertEquals(1, recipe.getContainIngredients().size());
+    }
 }

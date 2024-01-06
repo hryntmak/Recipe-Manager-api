@@ -40,9 +40,9 @@ public class RecipeServiceImpl extends CrudServiceImpl<Recipe, Long> implements 
         Recipe recipe = optRecipe.get();
         Ingredient ingredient = optIngredient.get();
 
+        if (recipe.getContainIngredients().contains(ingredient))
+            return;
         recipe.getContainIngredients().add(ingredient);
-        ingredient.getIncludesIn().add(recipe);
-
         recipeRepository.save(recipe);
     }
 

@@ -54,7 +54,11 @@ Content-Type: application/json
   "cookingTime": 123,
   "name": "borsh"
 }
+###
+PUT http://localhost:8080/recipes/1/ingredients/1
 
+###
+PUT http://localhost:8080/recipes/1/ingredients/3
 
 ###
 PUT http://localhost:8080/recipes/2/ingredients/1
@@ -63,21 +67,7 @@ PUT http://localhost:8080/recipes/2/ingredients/1
 PUT http://localhost:8080/recipes/2/ingredients/2
 
 ###
-PUT http://localhost:8080/recipes/1/ingredients/1
-
-###
-PUT http://localhost:8080/recipes/1/ingredients/2
-
-###
-PUT http://localhost:8080/recipes/1/ingredients/3
-
-###
 PUT http://localhost:8080/recipes/3/ingredients/3
-
-###
-GET http://localhost:8080/recipes
-Accept: application/json
-
 
 ###
 GET http://localhost:8080/ingredients
@@ -86,12 +76,6 @@ Accept: application/json
 ###
 GET http://localhost:8080/dishes
 Accept: application/json
-
-
-###
-GET http://localhost:8080/recipes/ingredients/2
-Accept: application/json
-
 
 ###
 GET http://localhost:8080/recipes
