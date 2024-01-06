@@ -2,7 +2,6 @@ package cz.cvut.fit.tjv.recipe_api.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import cz.cvut.fit.tjv.recipe_api.enums.Cuisine;
 import jakarta.persistence.*;
 
 import java.util.Collection;
@@ -14,8 +13,8 @@ public class Dish implements EntityWithId<Long>{
     @GeneratedValue
     private Long id;
     private String name;
-    private Cuisine cuisine;
-    @OneToMany(mappedBy = "dish", fetch = FetchType.EAGER)
+    private String cuisine;
+    @OneToMany(mappedBy = "dish", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = false)
     @JsonIgnoreProperties("dish")
     private Collection<Recipe> recipes;
 
@@ -45,11 +44,11 @@ public class Dish implements EntityWithId<Long>{
         this.name = name;
     }
 
-    public Cuisine getCuisine() {
+    public String getCuisine() {
         return cuisine;
     }
 
-    public void setCuisine(Cuisine cuisine) {
+    public void setCuisine(String cuisine) {
         this.cuisine = cuisine;
     }
 

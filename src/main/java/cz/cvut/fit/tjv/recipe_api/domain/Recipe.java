@@ -16,13 +16,17 @@ public class Recipe implements EntityWithId<Long> {
     private Complexity complexity;
     private int cookingTime;
     private String name;
-    @ManyToMany(mappedBy = "includesIn", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "recipes_ingredients",
+            joinColumns = @JoinColumn(name = "Recipes_id"),
+            inverseJoinColumns = @JoinColumn(name = "Ingredient_id")
+    )
     @JsonIgnoreProperties("includesIn")
     private final Collection<Ingredient> containIngredients = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("recipes")
-    @JoinColumn(name = "dish_id")
     private Dish dish;
 
     @Override
