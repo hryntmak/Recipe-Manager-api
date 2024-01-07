@@ -37,7 +37,7 @@ V adřesáři `BI_TJV_semestral_work_client`
 ```
 ./gradlew bootRun
 ```
-Aplikace bude dostupná na adrese: http://localhost:7090
+Aplikace bude dostupná na adrese: http://localhost:9091
 
 
 
