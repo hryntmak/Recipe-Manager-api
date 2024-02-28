@@ -2,7 +2,7 @@
 
 A simplified recipe service where you can add ingredients, recipes and dishes. A recipe for a dish can be created from ingredients by specifying the complexity of the recipe and the time for its preparation in minutes.
 
-![Conceptual_scheme](https://gitlab.fit.cvut.cz/hryntmak/bi-tjv_semestral_work/-/raw/master/image_2023-10-26_19-07-30.png)
+![Conceptual_scheme]([https://gitlab.fit.cvut.cz/hryntmak/bi-tjv_semestral_work/-/raw/master/image_2023-10-26_19-07-30.png](https://github.com/hryntmak/Recipe-Manager/blob/master/image_2023-10-26_19-07-30.png?raw=true))
 
 > _**Coplex querimes:**_
 > 
@@ -19,8 +19,8 @@ A simplified recipe service where you can add ingredients, recipes and dishes. A
 
 **Aplikace se skládá ze 2 částí:**
 
-- API: https://gitlab.fit.cvut.cz/hryntmak/bi-tjv_semestral_work
-- Client: https://gitlab.fit.cvut.cz/hryntmak/BI_TJV_semestral_work_client
+- API: https://github.com/hryntmak/Recipe-Manager-api
+- Client: https://github.com/hryntmak/Recipe-Manager-client
 
 ### Požadavky 
 - JVM
@@ -28,12 +28,12 @@ A simplified recipe service where you can add ingredients, recipes and dishes. A
 
 ## Spuštění aplikace
 ### API
-V adresáři `bi-tjv_semestral_work`
+V adresáři `Recipe-Manager`
 ```
 ./gradlew bootRun
 ```
 ### Client
-V adřesáři `BI_TJV_semestral_work_client`
+V adřesáři `Recipe-Manager-client`
 ```
 ./gradlew bootRun
 ```
