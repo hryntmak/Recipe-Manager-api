@@ -14,30 +14,30 @@ A simplified recipe service where you can add ingredients, recipes and dishes. A
 > When adding ingredients to a recipe, if the final number of ingredients is more than 7, complexity will be change to MEDIUM if it was originally specified LOW, and with 12 or more ingredients to HIGH if it was originally specified as LOW or MEDIUM.
 
 
-# Příprava a spuštění
-## Instalace
+# Preparation and launch
+## Installation
 
-**Aplikace se skládá ze 2 částí:**
+**The application consists of 2 parts:**
 
 - API: https://github.com/hryntmak/Recipe-Manager-api
 - Client: https://github.com/hryntmak/Recipe-Manager-client
 
-### Požadavky 
+### Requirements 
 - JVM
 - Gradle
 
-## Spuštění aplikace
+## Launch the app
 ### API
-V adresáři `Recipe-Manager`
+In the directory `Recipe-Manager-api`
 ```
 ./gradlew bootRun
 ```
 ### Client
-V adřesáři `Recipe-Manager-client`
+In the directory `Recipe-Manager-client`
 ```
 ./gradlew bootRun
 ```
-Aplikace bude dostupná na adrese: http://localhost:9091
+The application will be available at: http://localhost:9091
 
 
 
