@@ -2,7 +2,7 @@
 
 A simplified recipe service where you can add ingredients, recipes and dishes. A recipe for a dish can be created from ingredients by specifying the complexity of the recipe and the time for its preparation in minutes.
 
-![Conceptual_scheme]([https://gitlab.fit.cvut.cz/hryntmak/bi-tjv_semestral_work/-/raw/master/image_2023-10-26_19-07-30.png](https://github.com/hryntmak/Recipe-Manager/blob/master/image_2023-10-26_19-07-30.png?raw=true))
+![Conceptual_scheme](https://github.com/hryntmak/Recipe-Manager/blob/master/image_2023-10-26_19-07-30.png?raw=true)
 
 > _**Coplex querimes:**_
 > 
